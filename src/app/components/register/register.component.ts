@@ -42,8 +42,7 @@ export class RegisterComponent implements OnInit {
       this.apiService.registerUser(registerData).subscribe((user: User) => {
         this.authService.setUser(user);
         console.log("Registered: ",user);
-        //Here goes the nest window
-        //this.router.navigate(['/review']);
+        this.router.navigate(['/profile']);
       }); 
     }
 

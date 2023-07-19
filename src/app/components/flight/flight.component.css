@@ -1,0 +1,52 @@
+.mapa {
+    width: 600px;
+    height: 600px;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .map-container {
+    flex: 1;
+    margin-right: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .data-column {
+    flex: 1;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  p {
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .title-style {
+    text-align: center; /* Para centrar el texto horizontalmente */
+    font-size: 32px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    color: #4CAF50;; /* Color del texto (puedes ajustarlo según tus preferencias) */
+    /* Otros estilos que desees agregar, como márgenes, padding, etc. */
+  }

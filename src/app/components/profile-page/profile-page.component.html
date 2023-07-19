@@ -1,0 +1,42 @@
+<section class="profile-section">
+    <div class="profile-container">
+      <div class="profile-avatar">
+        <img src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="Profile Avatar">
+        <div class="avatar-placeholder"></div>
+      </div>
+      <div class="profile-info">
+        <h2>{{ user.name }}</h2>
+        <p> {{ user.email }}</p>
+        <button class="btn-red"(click)="onLogout()">Cerrar Sesión</button>
+      </div>
+    </div>
+</section>
+
+<section class="objects-section">
+  <div class="objects-container">
+    <h3>Tus vuelos</h3>
+
+  <!-- Utilizar *ngIf para mostrar el letrero si la lista de objetos está vacía -->
+  <div *ngIf="fligths.length === 0"class="objects-empty-message">
+    <p>No hay vuelos</p>
+  </div>
+
+
+  <table *ngIf="fligths.length > 0">
+    <thead>
+      <tr>
+        <th>Id </th>
+        <th>Lugar </th>
+        <th>Fecha Inicio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let obj of fligths"[routerLink]="['/fligth/',obj.id]">
+        <td>{{ obj.id}}</td>
+        <td>Latitud: {{ obj.locationinitLat }}; Longitud{{ obj.locationinitLng }}</td>
+        <td>{{ obj.date }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>

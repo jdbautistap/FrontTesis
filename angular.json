@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Front_tesis": {
+    "Front-tesis": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Front_tesis:build:production"
+              "browserTarget": "Front-tesis:build:production"
             },
             "development": {
-              "browserTarget": "Front_tesis:build:development"
+              "browserTarget": "Front-tesis:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Front_tesis:build"
+            "browserTarget": "Front-tesis:build"
           }
         },
         "test": {

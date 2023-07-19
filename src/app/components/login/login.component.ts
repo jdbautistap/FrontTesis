@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService, 
     private router: Router) {
     this.loginForm = fb.group({
-      email: fb.control('', [Validators.required, Validators.email]),
-      password: fb.control('', [Validators.required, Validators.minLength(6)]),
+      email: fb.control('', [Validators.required]),
+      password: fb.control('', [Validators.required]),
     });
   } 
   
@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
   
       this.apiService.loginUser(credentials).subscribe((user: User) => {
         this.authService.setUser(user);
-        console.log("Logged In:", user);
-        this.router.navigate(['/review']);
+        this.router.navigate(['/profile']);
       });
     }
   }

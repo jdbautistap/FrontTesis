@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ApiService {
-    private readonly BACKEND_URL = 'http://localhost:8080';
+    private readonly BACKEND_URL = 'http://3.208.19.176:80';
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +18,8 @@ export class ApiService {
   }
 
   loginUser(loginForm: LoginForm): Observable<User> {
+    console.log ("Email:  "+loginForm.email)
+    console.log ("Contraseña:  "+loginForm.password)
     return this.http.post<User>(`${this.BACKEND_URL}/api/usuario/login`, loginForm);
   }
 
@@ -25,10 +27,12 @@ export class ApiService {
     return this.http.post<InputResponse>(`${this.BACKEND_URL}/api/resenias/usuario/${userId}`, input);
   }
 
-  getPastReviews(userId: number): Observable<Input[]> {
-    return this.http.get<Input[]>(`${this.BACKEND_URL}/api/resenias/usuario/${userId}`);
+  getPastFligths(userId: number): Observable<InputResponse[]> {
+    return this.http.get<InputResponse[]>(`${this.BACKEND_URL}/api/usuario/${userId}/vuelo`);
+  }
+  getPastFligth(userId: number, flightid:String): Observable<InputResponse> {
+    return this.http.get<InputResponse>(`${this.BACKEND_URL}/api/usuario/${userId}/vuelo/${flightid}`);
   }
   
-
   // Add more methods for fetching past reviews and model stats
 }

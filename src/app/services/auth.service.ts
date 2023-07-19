@@ -18,4 +18,8 @@ export class AuthService {
   getUserId(): number | null {
     return this.currentUser ? this.currentUser.id : null;
   }
+
+  deleteUser():void{
+    this.currentUser=null;
+  }
 }
