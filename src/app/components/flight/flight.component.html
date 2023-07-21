@@ -12,12 +12,15 @@
       <p><strong>Tipo de Vuelo: </strong> {{fligth.type}}</p>
       <p><strong>Fecha inicio: </strong> {{fligth.date}}</p>
       <p><strong>Altitud: </strong> {{ fligth.altitude }} metros</p>
-      <p><strong>Numero de Pines: </strong> {{ fligth.numberWaypoints }}</p>
+      <p><strong>Numero de Waypoints: </strong> {{ fligth.numberWaypoints }}</p>
       <p><strong>Velocidad: </strong> {{ fligth.speed }}</p>
       <p><strong>Heading: </strong> {{ fligth.heading }}</p>
       <p><strong>Acción al finalizar: </strong> {{ fligth.finishing}}</p>
       <p><strong>Duración del vuelo: </strong> {{ fligth.duration}} minutos</p>
       <p><strong>Fecha fin: </strong> {{fligth.finishdate}}</p>
-      <!-- Y así sucesivamente -->
+
+      <button (click)="guardarArchivoDeTexto()">Generar archivo TXT</button>
+
+
     </div>
   </div>

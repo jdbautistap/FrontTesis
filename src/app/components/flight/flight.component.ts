@@ -28,8 +28,6 @@ export class FlightComponent {
 
   fechaInicial:string
   fechaFinal:string
-  
-
 
   constructor(private route: ActivatedRoute,
     private renderer: Renderer2,
@@ -40,7 +38,6 @@ export class FlightComponent {
     this.fligthid ="";
     this.fechaInicial="";
     this.fechaFinal="";
-    
    }
 
   
@@ -60,8 +57,7 @@ export class FlightComponent {
   }
 
   ngAfterViewInit(): void {
-    this.crearwaypointsList()
-    this.crearCoordinateList()
+
     const opciones = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -102,10 +98,13 @@ export class FlightComponent {
       const i=new google.maps.LatLng(objeto.latitude,objeto.longitude)
       this.markersCoordinates.push(i)
     });
+    console.log("HOLA"+this.markersCoordinates)
   }
 
   cargarMapa(position: any): any {
 
+    this.crearwaypointsList()
+    this.crearCoordinateList()
 
     const opciones = {
       center: new google.maps.LatLng(this.fligth.locationinitLat,this.fligth.locationinitLng),
@@ -165,5 +164,44 @@ export class FlightComponent {
     droneMovement.setMap(this.mapa)
     markerPositionInit.setMap(this.mapa);
     markerPositionFinish.setMap(this.mapa);
+  };
+
+  crearContenido():string{
+
+  const resumenVuelo : string =
+  "Hola " + this.user.name + "\n\n" +
+  "Aquí tienes el resumen de tu vuelo\n\n" +
+  "Codigo Mision: "+this.fligth.missionCoode+ "\n\n" +
+  "Aeronave: Mavick Pro 1."+ "\n" +
+  "Fecha del vuelo: " + this.fligth.date + "\n" +
+  "Punto inicial: Latitud: " + this.fligth.locationinitLat+ ", Longitud: " + this.fligth.locationinitLng+ "\n" +
+  "Tipo de Vuelo: "+this.fligth.type+ "\n" +
+  "Altitud: "+this.fligth.altitude+ "\n" +
+  "Heading: "+this.fligth.heading+ "\n" +
+  "Finishing: "+this.fligth.finishing+ "\n" +
+  "Numero de Waypoints: "+this.fligth.numberWaypoints+ "\n" +
+  "Radio: "+this.fligth.radius+ "\n" +
+  "Speed: "+this.fligth.speed+ "\n" +
+  "Waypoints List: "+this.fligth.waypointsList+ "\n" +
+  "Vuelo que realizo el Dron: "+this.fligth.coordinates+ "\n" +
+  "Duration: "+this.fligth.duration+ "\n" +
+  "Fecha Fin: "+this.fligth.finishdate+ "\n" +
+  "Duration: "+this.fligth.duration+ "\n" +
+  "Punto de Llegada: Latitud: " + this.fligth.locationFinishLat+ ", Longitud: " + this.fligth.locationFinishLng
+  return resumenVuelo
+  }
+
+
+
+
+
+  guardarArchivoDeTexto(){
+    const a = document.createElement("a");
+    const archivo = new Blob([this.crearContenido()], { type: 'text/plain' });
+    const url = URL.createObjectURL(archivo);
+    a.href = url;
+    a.download = "Info Vuelo de "+this.user.name+" con Id "+this.fligthid+".txt";
+    a.click();
+    URL.revokeObjectURL(url);
   };
 }
