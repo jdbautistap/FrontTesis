@@ -1,4 +1,10 @@
-<h2 class="title-style">Aquí Está Tu Vuelo.</h2>
+<div *ngIf="fligth.finishdate != null" class="objects-empty-message">
+  <h2 class="title-style">Aquí Está Tu Vuelo.</h2>
+</div>
+<div *ngIf="fligth.finishdate == null" class="objects-empty-message">
+  <h2 class="title-style">Aquí Está Tu Vuelo No completado.</h2>
+</div>
+
 
 
 
@@ -16,9 +22,12 @@
       <p><strong>Velocidad: </strong> {{ fligth.speed }}</p>
       <p><strong>Heading: </strong> {{ fligth.heading }}</p>
       <p><strong>Acción al finalizar: </strong> {{ fligth.finishing}}</p>
-      <p><strong>Duración del vuelo: </strong> {{ fligth.duration}} Segundos</p>
-      <p><strong>Fecha fin: </strong> {{fligth.finishdate}}</p>
-
+      <div *ngIf="fligth.duration != null" class="objects-empty-message">
+        <p><strong>Duración del vuelo: </strong> {{ fligth.duration}} Segundos</p>
+      </div>
+      <div *ngIf="fligth.finishdate != null" class="objects-empty-message">
+        <p><strong>Fecha fin: </strong> {{fligth.finishdate}}</p>
+      </div>
       <button (click)="guardarArchivoDeTexto()">Generar archivo TXT</button>
 
 

@@ -68,7 +68,7 @@ export class FlightComponent {
 
       navigator.geolocation.getCurrentPosition(async (position) => {
 
-        await this.cargarMapa(position);
+        await this.cargarMapa();
 
       }, null, opciones);
 
@@ -101,11 +101,10 @@ export class FlightComponent {
     console.log("HOLA"+this.markersCoordinates)
   }
 
-  cargarMapa(position: any): any {
+  cargarMapa(): any {
 
     this.crearwaypointsList()
-    this.crearCoordinateList()
-
+    
     const opciones = {
       center: new google.maps.LatLng(this.fligth.locationinitLat,this.fligth.locationinitLng),
       zoom: 20,
@@ -121,22 +120,34 @@ export class FlightComponent {
         scaledSize: new google.maps.Size(30, 30), 
       }
     });
-    const markerPositionFinish = new google.maps.Marker({
-      position: new google.maps.LatLng(this.fligth.locationFinishLat,this.fligth.locationFinishLng),
-      title: "Punto Fin Dron",    
-      icon:{
-        url:'https://cdn-icons-png.flaticon.com/512/3294/3294560.png',
-        scaledSize: new google.maps.Size(30, 30), 
-      }
-    });
 
-    const droneMovement = new google.maps.Polyline({
-      path: this.markersCoordinates,
-      geodesic: true,
-      strokeColor: "#00FFFF",
-      strokeOpacity: 1.0,
-      strokeWeight: 2,  
-    });
+    if(this.fligth.locationFinishLat!=null&&this.fligth.locationFinishLng!=null){
+
+      const markerPositionFinish = new google.maps.Marker({
+        position: new google.maps.LatLng(this.fligth.locationFinishLat,this.fligth.locationFinishLng),
+        title: "Punto Fin Dron",    
+        icon:{
+          url:'https://cdn-icons-png.flaticon.com/512/3294/3294560.png',
+          scaledSize: new google.maps.Size(30, 30), 
+        }
+      });
+
+      markerPositionFinish.setMap(this.mapa);
+    }
+    
+
+    if(this.fligth.coordinates!=null){
+      this.crearCoordinateList()
+      const droneMovement = new google.maps.Polyline({
+        path: this.markersCoordinates,
+        geodesic: true,
+        strokeColor: "#00FFFF",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,  
+      });
+      droneMovement.setMap(this.mapa)
+    }
+    
 
     let i = 1 
 
@@ -161,9 +172,7 @@ export class FlightComponent {
     });
 
     polygon.setMap(this.mapa);
-    droneMovement.setMap(this.mapa)
     markerPositionInit.setMap(this.mapa);
-    markerPositionFinish.setMap(this.mapa);
   };
 
   crearContenido():string{
@@ -171,7 +180,7 @@ export class FlightComponent {
   const resumenVuelo : string =
   "Hola " + this.user.name + "\n\n" +
   "Aquí tienes el resumen de tu vuelo\n\n" +
-  "Codigo Mision: "+this.fligth.missionCoode+ "\n\n" +
+  "Codigo Mision: "+this.fligth.missionCode+ "\n\n" +
   "Aeronave: Mavick Pro 1."+ "\n" +
   "Fecha del vuelo: " + this.fligth.date + "\n" +
   "Punto inicial: Latitud: " + this.fligth.locationinitLat+ ", Longitud: " + this.fligth.locationinitLng+ "\n" +
